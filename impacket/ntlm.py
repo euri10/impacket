@@ -13,6 +13,7 @@ import random
 import string
 import binascii
 
+
 from impacket.structure import Structure
 from impacket import LOG
 
@@ -236,7 +237,7 @@ class AV_PAIRS:
 
     def dump(self):
         for i in self.fields.keys():
-            print "%s: {%r}" % (i,self[i])
+            print("%s: {%r}" % (i,self[i]))
 
     def getData(self):
         if self.fields.has_key(NTLMSSP_AV_EOL):
@@ -627,7 +628,7 @@ def getNTLMSSPType3(type1, type2, user, password, domain, lmhash = '', nthash = 
     # method we will create a valid ChallengeResponse
     ntlmChallengeResponse = NTLMAuthChallengeResponse(user, password, ntlmChallenge['challenge'])
 
-    clientChallenge = "".join([random.choice(string.digits+string.letters) for _ in xrange(8)])
+    clientChallenge = "".join([random.choice(string.digits+string.letters) for _ in range(8)])
 
     serverName = ntlmChallenge['TargetInfoFields']
 
@@ -666,7 +667,7 @@ def getNTLMSSPType3(type1, type2, user, password, domain, lmhash = '', nthash = 
     if ntlmChallenge['flags'] & NTLMSSP_NEGOTIATE_KEY_EXCH:
        # not exactly what I call random tho :\
        # exportedSessionKey = this is the key we should use to sign
-       exportedSessionKey = "".join([random.choice(string.digits+string.letters) for _ in xrange(16)])
+       exportedSessionKey = "".join([random.choice(string.digits+string.letters) for _ in range(16)])
        #exportedSessionKey = "A"*16
        #print "keyExchangeKey %r" % keyExchangeKey
        # Let's generate the right session key based on the challenge flags

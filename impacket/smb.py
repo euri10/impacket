@@ -630,9 +630,11 @@ class SharedFile:
     @staticmethod
     def __convert_smbtime(t):
         x = t >> 32
-        y = t & 0xffffffffL
+        # y = t & 0xffffffffL
+        y = t & 0xffffffff
         geo_cal_offset = 11644473600.0  # = 369.0 * 365.25 * 24 * 60 * 60 - (3.0 * 24 * 60 * 60 + 6.0 * 60 * 60)
-        return (x * 4.0 * (1 << 30) + (y & 0xfff00000L)) * 1.0e-7 - geo_cal_offset
+        # return (x * 4.0 * (1 << 30) + (y & 0xfff00000L)) * 1.0e-7 - geo_cal_offset
+        return (x * 4.0 * (1 << 30) + (y & 0xfff00000)) * 1.0e-7 - geo_cal_offset
 
 
 # Contain information about a SMB machine
@@ -710,9 +712,9 @@ class NewSMBPacket(Structure):
                 return 1
             elif self.isMoreProcessingRequired():
                 return 1
-            raise SessionError, ("SMB Library Error", self['ErrorClass'] + (self['_reserved'] << 8), self['ErrorCode'], self['Flags2'] & SMB.FLAGS2_NT_STATUS)
+            raise SessionError("SMB Library Error", self['ErrorClass'] + (self['_reserved'] << 8), self['ErrorCode'], self['Flags2'] & SMB.FLAGS2_NT_STATUS)
         else:
-            raise UnsupportedFeature, ("Unexpected answer from server: Got %d, Expected %d" % (self['Command'], cmd))
+            raise UnsupportedFeature("Unexpected answer from server: Got %d, Expected %d" % (self['Command'], cmd))
 
 
 class SMBCommand(Structure):
@@ -2571,7 +2573,7 @@ class SMB:
                     if s.get_error_class() == 0x00 and s.get_error_code() == 0x00:
                         return 1
                     else:
-                        raise SessionError, ( "SMB Library Error", s.get_error_class()+ (s.get_reserved() << 8), s.get_error_code() , s.get_flags2() & SMB.FLAGS2_NT_STATUS )
+                        raise SessionError( "SMB Library Error", s.get_error_class()+ (s.get_reserved() << 8), s.get_error_code() , s.get_flags2() & SMB.FLAGS2_NT_STATUS )
                 else:
                     break
         return 0
@@ -2604,7 +2606,7 @@ class SMB:
                         self.__server_name = self._dialects_data['ServerName']
 
                     if self._dialects_parameters['DialectIndex'] == 0xffff:
-                        raise UnsupportedFeature,"Remote server does not know NT LM 0.12"
+                        raise UnsupportedFeature("Remote server does not know NT LM 0.12")
                     return 1
             else:
                 return 0

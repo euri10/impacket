@@ -816,9 +816,9 @@ class DCERPC:
         # default is 0: don'fragment. v4 will override this method
         self._max_user_frag = 0
 
-    def send(self, data): raise RuntimeError, 'virtual method. Not implemented in subclass'
-    def recv(self): raise RuntimeError, 'virtual method. Not implemented in subclass'
-    def alter_ctx(self, newUID, bogus_binds = ''): raise RuntimeError, 'virtual method. Not implemented in subclass'
+    def send(self, data): raise RuntimeError('virtual method. Not implemented in subclass')
+    def recv(self): raise RuntimeError('virtual method. Not implemented in subclass')
+    def alter_ctx(self, newUID, bogus_binds = ''): raise RuntimeError('virtual method. Not implemented in subclass')
     def set_credentials(self, username, password, domain = '', lmhash = '', nthash = '', aesKey = '', TGT=None, TGS=None): pass
     def set_auth_level(self, auth_level): pass
     def set_auth_type(self, auth_type, callback = None): pass

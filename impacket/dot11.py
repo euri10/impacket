@@ -14,8 +14,8 @@ import struct
 import string
 from binascii import crc32
 
-from ImpactPacket import ProtocolPacket
-from Dot11Crypto import RC4
+from impacket.ImpactPacket import ProtocolPacket
+from impacket.Dot11Crypto import RC4
 
 frequency = {
     2412: 1,    2417: 2,    2422: 3,    2427: 4,    2432: 5,    2437: 6,    2442: 7,    2447: 8,    2452: 9,
@@ -467,7 +467,7 @@ class Dot11(ProtocolPacket):
         self.header.set_byte(0, nb)
         
     def compute_checksum(self,bytes):
-        crcle=crc32(bytes)&0xffffffffL
+        crcle=crc32(bytes)&0xffffffff
         # ggrr this crc32 is in little endian, convert it to big endian 
         crc=struct.pack('<L', crcle)
          # Convert to long
@@ -1125,7 +1125,7 @@ class Dot11WEPData(ProtocolPacket):
         self.tail.set_long(-4, nb)
     
     def get_computed_icv(self):
-        crcle=crc32(self.body_string)&0xffffffffL
+        crcle=crc32(self.body_string)&0xffffffff
         # This crc32 is in little endian, convert it to big endian 
         crc=struct.pack('<L', crcle)
          # Convert to long
@@ -1583,8 +1583,14 @@ class RadioTap(ProtocolPacket):
     
     # Sort the list so the 'for' statement walk the list in the right order
     radiotap_fields = __RadioTapField.__subclasses__()
-    radiotap_fields.sort(lambda x, y: cmp(x.BIT_NUMBER,y.BIT_NUMBER))
-    
+
+    # radiotap_fields.sort(lambda x, y: cmp(x.BIT_NUMBER,y.BIT_NUMBER))
+    def keyfunction(item):
+        """Key for comparison by BIT_NUMBER"""
+        return item.BIT_NUMBER
+
+    radiotap_fields.sort(key=keyfunction)
+
     def __init__(self, aBuffer = None):
         header_size = self.__HEADER_BASE_SIZE 
         tail_size = 0

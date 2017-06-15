@@ -1,0 +1,4 @@
+nose
+pycrypto
+configparser
+pyasn1
