@@ -1,11 +1,7 @@
 #!/usr/bin/env python
 
-# sorry, this is very ugly, but I'm in python 2.5
-import sys
-sys.path.insert(0,"../..")
-
-from dot11 import ProtocolPacket
-from ImpactPacket import ProtocolLayer, PacketBuffer
+from impacket.dot11 import ProtocolPacket
+from impacket.ImpactPacket import ProtocolLayer, PacketBuffer
 from binascii import hexlify
 import unittest
     

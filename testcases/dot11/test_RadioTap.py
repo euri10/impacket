@@ -1,13 +1,11 @@
 #!/usr/bin/env python
 
-# sorry, this is very ugly, but I'm in python 2.5
-import sys
-import unittest
-sys.path.insert(0, "../..")
+
 
 from impacket.dot11 import RadioTap
 from impacket.ImpactPacket import Data
 
+import unittest
 
 class TestRadioTap(unittest.TestCase):
 

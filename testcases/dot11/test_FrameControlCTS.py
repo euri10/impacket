@@ -1,10 +1,7 @@
 #!/usr/bin/env python
 
-# sorry, this is very ugly, but I'm in python 2.5
-import sys
-sys.path.insert(0,"../..")
 
-from dot11 import Dot11,Dot11Types,Dot11ControlFrameCTS
+from impacket.dot11 import Dot11,Dot11Types,Dot11ControlFrameCTS
 from binascii import hexlify
 import unittest
 

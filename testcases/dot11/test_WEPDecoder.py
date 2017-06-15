@@ -1,13 +1,11 @@
 #!/usr/bin/env python
 
-# sorry, this is very ugly, but I'm in python 2.5
-import sys
-sys.path.insert(0,"../..")
 
-from dot11 import Dot11,Dot11Types,Dot11DataFrame,Dot11WEP,Dot11WEPData
-from ImpactPacket import IP,ICMP
-from Dot11KeyManager import KeyManager
-from ImpactDecoder import Dot11Decoder
+
+from impacket.dot11 import Dot11,Dot11Types,Dot11DataFrame,Dot11WEP,Dot11WEPData
+from impacket.ImpactPacket import IP,ICMP
+from impacket.Dot11KeyManager import KeyManager
+from impacket.ImpactDecoder import Dot11Decoder
 from binascii import hexlify
 import unittest
 
