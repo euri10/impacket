@@ -902,7 +902,7 @@ class TSCHTests(unittest.TestCase):
 class SMBTransport(TSCHTests):
     def setUp(self):
         TSCHTests.setUp(self)
-        configFile = ConfigParser.ConfigParser()
+        configFile = ConfigParser()
         configFile.read('dcetests.cfg')
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')
@@ -917,7 +917,7 @@ class SMBTransport(TSCHTests):
 class SMBTransport64(TSCHTests):
     def setUp(self):
         TSCHTests.setUp(self)
-        configFile = ConfigParser.ConfigParser()
+        configFile = ConfigParser()
         configFile.read('dcetests.cfg')
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')

@@ -45,7 +45,7 @@ class SMBRelayServer(Thread):
         self.proxyTranslator = None
 
         # Here we write a mini config for the server
-        smbConfig = ConfigParser.ConfigParser()
+        smbConfig = ConfigParser()
         smbConfig.add_section('global')
         smbConfig.set('global','server_name','server_name')
         smbConfig.set('global','server_os','UNIX')
@@ -112,7 +112,7 @@ class SMBRelayServer(Thread):
                     extSec = True
             #Init the correct client for our target
             client = self.init_client(extSec)
-        except Exception, e:
+        except Exception as e:
             logging.error("Connection against target %s FAILED" % self.target[1])
             logging.error(str(e))
             self.targetprocessor.log_target(connData['ClientIP'],self.target)
@@ -173,7 +173,7 @@ class SMBRelayServer(Thread):
                 client = smbData[self.target]['SMBClient']
                 try:
                     challengeMessage = self.do_ntlm_negotiate(client,token)
-                except Exception, e:
+                except Exception as e:
                     logging.error("Connection against target %s FAILED" % self.target[1])
                     logging.error(str(e))
                     # Log this target as processed for this client
@@ -400,7 +400,7 @@ class SMBRelayServer(Thread):
                     errorCode = STATUS_SUCCESS
                 else:
                     errorCode = STATUS_ACCESS_DENIED
-            except Exception, e:
+            except Exception as e:
                 logging.error("NTLM Message type 3 against %s FAILED" % self.target[1])
                 logging.error(str(e))
                 errorCode = STATUS_ACCESS_DENIED
@@ -415,12 +415,12 @@ class SMBRelayServer(Thread):
                     logging.error("LDAP bind against %s as %s FAILED" % (self.target[1],self.authUser))
                     logging.error('Error: %s. Message: %s' % (result['description'],str(result['message'])))
                     errorCode = STATUS_ACCESS_DENIED
-                print errorCode
+                print(errorCode)
                 #Failed example:
                 #{'dn': u'', 'saslCreds': None, 'referrals': None, 'description': 'invalidCredentials', 'result': 49, 'message': u'8009030C: LdapErr: DSID-0C0905FE, comment: AcceptSecurityContext error, data 52e, v23f0\x00', 'type': 'bindResponse'}
                 #Ok example:
                 #{'dn': u'', 'saslCreds': None, 'referrals': None, 'description': 'success', 'result': 0, 'message': u'', 'type': 'bindResponse'}
-            except Exception, e:
+            except Exception as e:
                 logging.error("NTLM Message type 3 against %s FAILED" % self.target[1])
                 logging.error(str(e))
                 errorCode = STATUS_ACCESS_DENIED
@@ -433,7 +433,7 @@ class SMBRelayServer(Thread):
                 else:
                     logging.error("HTTP NTLM auth against %s as %s FAILED" % (self.target[1],self.authUser))
                     errorCode = STATUS_ACCESS_DENIED
-            except Exception, e:
+            except Exception as e:
                 logging.error("NTLM Message type 3 against %s FAILED" % self.target[1])
                 logging.error(str(e))
                 errorCode = STATUS_ACCESS_DENIED
@@ -446,7 +446,7 @@ class SMBRelayServer(Thread):
                 else:
                     logging.error("IMAP NTLM auth against %s as %s FAILED" % (self.target[1],self.authUser))
                     errorCode = STATUS_ACCESS_DENIED
-            except Exception, e:
+            except Exception as e:
                 logging.error("IMAP NTLM Message type 3 against %s FAILED" % self.target[1])
                 logging.error(str(e))
                 errorCode = STATUS_ACCESS_DENIED

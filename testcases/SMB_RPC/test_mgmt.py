@@ -114,7 +114,7 @@ class MGMTTests(unittest.TestCase):
 class SMBTransport(MGMTTests):
     def setUp(self):
         MGMTTests.setUp(self)
-        configFile = ConfigParser.ConfigParser()
+        configFile = ConfigParser()
         configFile.read('dcetests.cfg')
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')
@@ -142,7 +142,7 @@ class TCPTransport(MGMTTests):
 class SMBTransport64(MGMTTests):
     def setUp(self):
         MGMTTests.setUp(self)
-        configFile = ConfigParser.ConfigParser()
+        configFile = ConfigParser()
         configFile.read('dcetests.cfg')
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')
@@ -156,7 +156,7 @@ class SMBTransport64(MGMTTests):
 class TCPTransport64(MGMTTests):
     def setUp(self):
         MGMTTests.setUp(self)
-        configFile = ConfigParser.ConfigParser()
+        configFile = ConfigParser()
         configFile.read('dcetests.cfg')
         self.username = configFile.get('TCPTransport', 'username')
         self.domain   = configFile.get('TCPTransport', 'domain')

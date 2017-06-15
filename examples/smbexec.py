@@ -32,7 +32,7 @@ import sys
 import os
 import cmd
 import argparse
-import ConfigParser
+from configparser import ConfigParser
 import logging
 from threading import Thread
 
@@ -61,7 +61,7 @@ class SMBServer(Thread):
 
     def run(self):
         # Here we write a mini config for the server
-        smbConfig = ConfigParser.ConfigParser()
+        smbConfig = ConfigParser()
         smbConfig.add_section('global')
         smbConfig.set('global','server_name','server_name')
         smbConfig.set('global','server_os','UNIX')
@@ -87,7 +87,7 @@ class SMBServer(Thread):
         logging.info('Creating tmp directory')
         try:
             os.mkdir(SMBSERVER_DIR)
-        except Exception, e:
+        except Exception as e:
             logging.critical(str(e))
             pass
         logging.info('Setting up SMB Server')
@@ -148,7 +148,7 @@ class CMDEXEC:
             self.shell.cmdloop()
             if self.__mode == 'SERVER':
                 serverThread.stop()
-        except  (Exception, KeyboardInterrupt), e:
+        except Exception as e:
             #import traceback
             #traceback.print_exc()
             logging.critical(str(e))
@@ -174,7 +174,7 @@ class RemoteShell(cmd.Cmd):
         self.__scmr = rpc.get_dce_rpc()
         try:
             self.__scmr.connect()
-        except Exception, e:
+        except Exception as e:
             logging.critical(str(e))
             sys.exit(1)
 
@@ -269,7 +269,7 @@ class RemoteShell(cmd.Cmd):
 
     def send_data(self, data):
         self.execute_remote(data)
-        print self.__outputBuffer
+        print(self.__outputBuffer)
         self.__outputBuffer = ''
 
 
@@ -277,7 +277,7 @@ class RemoteShell(cmd.Cmd):
 if __name__ == '__main__':
     # Init the example's logger theme
     logger.init()
-    print version.BANNER
+    print(version.BANNER)
 
     parser = argparse.ArgumentParser()
 
@@ -345,6 +345,6 @@ if __name__ == '__main__':
         executer = CMDEXEC(username, password, domain, options.hashes, options.aesKey, options.k,
                            options.dc_ip, options.mode, options.share, int(options.port))
         executer.run(remoteName, options.target_ip)
-    except Exception, e:
+    except Exception as e:
         logging.critical(str(e))
     sys.exit(0)

@@ -55,7 +55,7 @@ import os
 import argparse
 import logging
 import ntpath
-import ConfigParser
+from configparser import ConfigParser
 from threading import Thread
 
 from impacket.examples import logger
@@ -76,7 +76,7 @@ class KarmaSMBServer(Thread):
         self.extensions = {}
 
         # Here we write a mini config for the server
-        smbConfig = ConfigParser.ConfigParser()
+        smbConfig = ConfigParser()
         smbConfig.add_section('global')
         smbConfig.set('global','server_name','server_name')
         smbConfig.set('global','server_os','UNIX')
@@ -297,7 +297,7 @@ class KarmaSMBServer(Thread):
                    # First time asked, asking for the file
                    infoRecord, errorCode = queryPathInformation(path, self.defaultFile, queryPathInfoParameters['InformationLevel'])
                    connData['MS15011'][os.path.dirname(origPathName)] = infoRecord
-            except Exception, e:
+            except Exception as e:
                #import traceback
                #traceback.print_exc()
                smbServer.log("queryPathInformation: %s" % e,logging.ERROR)
@@ -590,7 +590,7 @@ class KarmaSMBServer(Thread):
 if __name__ == '__main__':
     # Init the example's logger theme
     logger.init()
-    print version.BANNER
+    print(version.BANNER)
     parser = argparse.ArgumentParser(add_help = False, description = "For every file request received, this module will "
                                                                      "return the pathname contents")
     parser.add_argument("--help", action="help", help='show this help message and exit')
@@ -607,7 +607,7 @@ if __name__ == '__main__':
 
     try:
        options = parser.parse_args()
-    except Exception, e:
+    except Exception as e:
        logging.critical(str(e))
        sys.exit(1)
 

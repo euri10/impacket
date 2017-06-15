@@ -83,7 +83,7 @@ class LDAPTests(unittest.TestCase):
 class TCPTransport(LDAPTests):
     def setUp(self):
         LDAPTests.setUp(self)
-        configFile = ConfigParser.ConfigParser()
+        configFile = ConfigParser()
         configFile.read('dcetests.cfg')
         self.username = configFile.get('TCPTransport', 'username')
         self.domain   = configFile.get('TCPTransport', 'domain')

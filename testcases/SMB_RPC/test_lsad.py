@@ -1021,7 +1021,7 @@ class LSADTests(unittest.TestCase):
 class SMBTransport(LSADTests):
     def setUp(self):
         LSADTests.setUp(self)
-        configFile = ConfigParser.ConfigParser()
+        configFile = ConfigParser()
         configFile.read('dcetests.cfg')
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')
@@ -1035,7 +1035,7 @@ class SMBTransport(LSADTests):
 class SMBTransport64(LSADTests):
     def setUp(self):
         LSADTests.setUp(self)
-        configFile = ConfigParser.ConfigParser()
+        configFile = ConfigParser()
         configFile.read('dcetests.cfg')
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')

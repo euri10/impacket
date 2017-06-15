@@ -657,7 +657,7 @@ class SCMRTests(unittest.TestCase):
 class SMBTransport(SCMRTests):
     def setUp(self):
         SCMRTests.setUp(self)
-        configFile = ConfigParser.ConfigParser()
+        configFile = ConfigParser()
         configFile.read('dcetests.cfg')
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')

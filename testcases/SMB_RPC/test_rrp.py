@@ -687,7 +687,7 @@ class RRPTests(unittest.TestCase):
 class SMBTransport(RRPTests):
     def setUp(self):
         RRPTests.setUp(self)
-        configFile = ConfigParser.ConfigParser()
+        configFile = ConfigParser()
         configFile.read('dcetests.cfg')
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')

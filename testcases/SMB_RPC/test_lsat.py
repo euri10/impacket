@@ -326,7 +326,7 @@ class LSATTests(unittest.TestCase):
 class SMBTransport(LSATTests):
     def setUp(self):
         LSATTests.setUp(self)
-        configFile = ConfigParser.ConfigParser()
+        configFile = ConfigParser()
         configFile.read('dcetests.cfg')
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')
@@ -340,7 +340,7 @@ class SMBTransport(LSATTests):
 class SMBTransport64(LSATTests):
     def setUp(self):
         LSATTests.setUp(self)
-        configFile = ConfigParser.ConfigParser()
+        configFile = ConfigParser()
         configFile.read('dcetests.cfg')
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')

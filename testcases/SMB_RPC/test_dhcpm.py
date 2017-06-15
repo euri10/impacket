@@ -10,7 +10,7 @@
 ################################################################################
 
 import unittest
-import ConfigParser
+from configparser import ConfigParser
 import socket
 
 from impacket.dcerpc.v5 import transport
@@ -58,7 +58,7 @@ class DHCPMTests(unittest.TestCase):
         try:
             resp = dce.request(request)
             resp.dump()
-        except Exception, e:
+        except Exception as e:
             # For now we'e failing. This is not supported in W2k8r2
             if str(e).find('nca_s_op_rng_error') >= 0:
                 pass
@@ -87,14 +87,14 @@ class DHCPMTests(unittest.TestCase):
         try:
             resp = dhcpm.hDhcpGetClientInfoV4(dce, dhcpm.DHCP_SEARCH_INFO_TYPE.DhcpClientName, 'PEPA\x00')
             resp.dump()
-        except Exception, e:
+        except Exception as e:
             if str(e).find('0x4e2d') >= 0:
                 pass
 
 class SMBTransport(DHCPMTests):
     def setUp(self):
         DHCPMTests.setUp(self)
-        configFile = ConfigParser.ConfigParser()
+        configFile = ConfigParser()
         configFile.read('dcetests.cfg')
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')
@@ -108,7 +108,7 @@ class SMBTransport(DHCPMTests):
 class SMBTransport64(DHCPMTests):
     def setUp(self):
         DHCPMTests.setUp(self)
-        configFile = ConfigParser.ConfigParser()
+        configFile = ConfigParser()
         configFile.read('dcetests.cfg')
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')
@@ -122,7 +122,7 @@ class SMBTransport64(DHCPMTests):
 class TCPTransport(DHCPMTests):
     def setUp(self):
         DHCPMTests.setUp(self)
-        configFile = ConfigParser.ConfigParser()
+        configFile = ConfigParser()
         configFile.read('dcetests.cfg')
         self.username = configFile.get('TCPTransport', 'username')
         self.domain   = configFile.get('TCPTransport', 'domain')
@@ -137,7 +137,7 @@ class TCPTransport(DHCPMTests):
 class TCPTransport64(DHCPMTests):
     def setUp(self):
         DHCPMTests.setUp(self)
-        configFile = ConfigParser.ConfigParser()
+        configFile = ConfigParser()
         configFile.read('dcetests.cfg')
         self.username = configFile.get('TCPTransport', 'username')
         self.domain = configFile.get('TCPTransport', 'domain')

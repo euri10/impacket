@@ -10,8 +10,7 @@
 ################################################################################
 
 import unittest
-import ConfigParser
-
+from configparser import ConfigParser
 from impacket.dcerpc.v5 import transport
 from impacket.dcerpc.v5 import mimilib, epm
 from impacket.dcerpc.v5.dtypes import NULL, MAXIMUM_ALLOWED, OWNER_SECURITY_INFORMATION
@@ -52,8 +51,8 @@ class RRPTests(unittest.TestCase):
     def test_MimiBind(self):
         dce, rpctransport, pHandle, key = self.connect()
         dh = mimilib.MimiDiffeH()
-        print 'Our Public'
-        print '='*80
+        print('Our Public')
+        print('='*80)
         hexdump(dh.genPublicKey())
 
         blob = mimilib.PUBLICKEYBLOB()
@@ -65,11 +64,11 @@ class RRPTests(unittest.TestCase):
 
         resp = dce.request(request)
         blob = mimilib.PUBLICKEYBLOB(''.join(resp['serverPublicKey']['pbPublicKey']))
-        print '='*80
-        print 'Server Public'
+        print('='*80)
+        print('Server Public')
         hexdump(''.join(blob['y']))
-        print '='*80
-        print 'Shared'
+        print('='*80)
+        print('Shared')
         hexdump(dh.getSharedSecret(''.join(blob['y'])[::-1]))
         resp.dump()
 
@@ -88,8 +87,8 @@ class RRPTests(unittest.TestCase):
         cipherText = ''.join(resp['encResult'])
         cipher = ARC4.new(key[::-1])
         plain = cipher.decrypt(cipherText)
-        print '='*80
-        print plain
+        print('='*80)
+        print(plain)
         #resp.dump()
 
     def test_MimiUnBind(self):
@@ -104,7 +103,7 @@ class RRPTests(unittest.TestCase):
 class TCPTransport(RRPTests):
     def setUp(self):
         RRPTests.setUp(self)
-        configFile = ConfigParser.ConfigParser()
+        configFile = ConfigParser()
         configFile.read('dcetests.cfg')
         self.username = configFile.get('TCPTransport', 'username')
         self.domain   = configFile.get('TCPTransport', 'domain')

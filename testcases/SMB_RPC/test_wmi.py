@@ -196,7 +196,7 @@ class WMITests(unittest.TestCase):
 class TCPTransport(WMITests):
     def setUp(self):
         WMITests.setUp(self)
-        configFile = ConfigParser.ConfigParser()
+        configFile = ConfigParser()
         configFile.read('dcetests.cfg')
         self.username = configFile.get('TCPTransport', 'username')
         self.domain   = configFile.get('TCPTransport', 'domain')

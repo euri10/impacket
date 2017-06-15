@@ -28,7 +28,7 @@
 ################################################################################
 
 import unittest
-import ConfigParser
+from configparser import ConfigParser
 
 from impacket.dcerpc.v5 import transport
 from impacket.dcerpc.v5 import wkst
@@ -179,7 +179,7 @@ class WKSTTests(unittest.TestCase):
         try:
             resp2 = dce.request(req)
             resp2.dump()
-        except Exception, e:
+        except Exception as e:
             if str(e).find('ERROR_INVALID_FUNCTION') < 0:
                 raise
 
@@ -259,7 +259,7 @@ class WKSTTests(unittest.TestCase):
         try:
             resp2 = dce.request(req)
             resp2.dump()
-        except Exception, e:
+        except Exception as e:
             if str(e).find('ERROR_INVALID_PARAMETER') < 0:
                 raise
 
@@ -269,7 +269,7 @@ class WKSTTests(unittest.TestCase):
         try:
             resp2 = wkst.hNetrWorkstationStatisticsGet(dce, '\x00', 0, 0)
             resp2.dump()
-        except Exception, e:
+        except Exception as e:
             if str(e).find('ERROR_INVALID_PARAMETER') < 0:
                 raise
 
@@ -283,7 +283,7 @@ class WKSTTests(unittest.TestCase):
         try:
             resp2 = dce.request(req)
             resp2.dump()
-        except Exception, e:
+        except Exception as e:
             if str(e).find('ERROR_INVALID_PARAMETER') < 0:
                 raise
 
@@ -293,7 +293,7 @@ class WKSTTests(unittest.TestCase):
         try:
             resp = wkst.hNetrGetJoinInformation(dce, '\x00')
             resp.dump()
-        except Exception, e:
+        except Exception as e:
             if str(e).find('ERROR_INVALID_PARAMETER') < 0:
                 raise
 
@@ -311,7 +311,7 @@ class WKSTTests(unittest.TestCase):
         try:
             resp2 = dce.request(req)
             resp2.dump()
-        except Exception, e:
+        except Exception as e:
             if str(e).find('ERROR_INVALID_PASSWORD') < 0:
                 raise
 
@@ -321,7 +321,7 @@ class WKSTTests(unittest.TestCase):
         try:
             resp = wkst.hNetrJoinDomain2(dce,'172.16.123.1\\FREEFLY\x00','OU=BETUS,DC=FREEFLY\x00',NULL,'\x00'*512, wkst.NETSETUP_DOMAIN_JOIN_IF_JOINED)
             resp.dump()
-        except Exception, e:
+        except Exception as e:
             if str(e).find('ERROR_INVALID_PASSWORD') < 0:
                 raise
 
@@ -337,7 +337,7 @@ class WKSTTests(unittest.TestCase):
         try:
             resp2 = dce.request(req)
             resp2.dump()
-        except Exception, e:
+        except Exception as e:
             if str(e).find('ERROR_INVALID_PASSWORD') < 0:
                 raise
 
@@ -347,7 +347,7 @@ class WKSTTests(unittest.TestCase):
         try:
             resp = wkst.hNetrUnjoinDomain2(dce, NULL, '\x00'*512, wkst.NETSETUP_ACCT_DELETE)
             resp.dump()
-        except Exception, e:
+        except Exception as e:
             if str(e).find('ERROR_INVALID_PASSWORD') < 0:
                 raise
 
@@ -364,7 +364,7 @@ class WKSTTests(unittest.TestCase):
         try:
             resp2 = dce.request(req)
             resp2.dump()
-        except Exception, e:
+        except Exception as e:
             if str(e).find('ERROR_INVALID_PASSWORD') < 0:
                 raise
 
@@ -374,7 +374,7 @@ class WKSTTests(unittest.TestCase):
         try:
             resp = wkst.hNetrRenameMachineInDomain2(dce, 'BETUS\x00', NULL, '\x00'*512, wkst.NETSETUP_ACCT_CREATE)
             resp.dump()
-        except Exception, e:
+        except Exception as e:
             if str(e).find('ERROR_INVALID_PASSWORD') < 0:
                 raise
 
@@ -390,7 +390,7 @@ class WKSTTests(unittest.TestCase):
         try:
             resp2 = dce.request(req)
             resp2.dump()
-        except Exception, e:
+        except Exception as e:
             if str(e).find('0x8001011c') < 0:
                 raise
 
@@ -400,7 +400,7 @@ class WKSTTests(unittest.TestCase):
         try:
             resp2 = wkst.hNetrValidateName2(dce, 'BETO\x00', NULL, NULL, wkst.NETSETUP_NAME_TYPE.NetSetupDomain)
             resp2.dump()
-        except Exception, e:
+        except Exception as e:
             if str(e).find('0x8001011c') < 0:
                 raise
 
@@ -417,7 +417,7 @@ class WKSTTests(unittest.TestCase):
         try:
             resp2 = dce.request(req)
             resp2.dump()
-        except Exception, e:
+        except Exception as e:
             if str(e).find('0x8001011c') < 0:
                 raise
 
@@ -427,7 +427,7 @@ class WKSTTests(unittest.TestCase):
         try:
             resp = wkst.hNetrGetJoinableOUs2(dce,'FREEFLY\x00', NULL, NULL,0 )
             resp.dump()
-        except Exception, e:
+        except Exception as e:
             if str(e).find('0x8001011c') < 0:
                 raise
 
@@ -443,7 +443,7 @@ class WKSTTests(unittest.TestCase):
         try:
             resp2 = dce.request(req)
             resp2.dump()
-        except Exception, e:
+        except Exception as e:
             if str(e).find('ERROR_NOT_SUPPORTED') < 0 and str(e).find('ERROR_INVALID_PASSWORD') < 0:
                 raise
 
@@ -453,7 +453,7 @@ class WKSTTests(unittest.TestCase):
         try:
             resp2= wkst.hNetrAddAlternateComputerName(dce, 'FREEFLY\x00', NULL, NULL)
             resp2.dump()
-        except Exception, e:
+        except Exception as e:
             if str(e).find('ERROR_NOT_SUPPORTED') < 0 and str(e).find('ERROR_INVALID_PASSWORD') < 0:
                 raise
 
@@ -469,7 +469,7 @@ class WKSTTests(unittest.TestCase):
         try:
             resp2 = dce.request(req)
             resp2.dump()
-        except Exception, e:
+        except Exception as e:
             if str(e).find('ERROR_NOT_SUPPORTED') < 0 and str(e).find('ERROR_INVALID_PASSWORD') < 0:
                 raise
 
@@ -479,7 +479,7 @@ class WKSTTests(unittest.TestCase):
         try:
             resp2 = wkst.hNetrRemoveAlternateComputerName(dce,'FREEFLY\x00', NULL, NULL )
             resp2.dump()
-        except Exception, e:
+        except Exception as e:
             if str(e).find('ERROR_NOT_SUPPORTED') < 0 and str(e).find('ERROR_INVALID_PASSWORD') < 0:
                 raise
 
@@ -495,7 +495,7 @@ class WKSTTests(unittest.TestCase):
         try:
             resp2 = dce.request(req)
             resp2.dump()
-        except Exception, e:
+        except Exception as e:
             if str(e).find('ERROR_NOT_SUPPORTED') < 0:
                 if str(e).find('ERROR_INVALID_PARAMETER') < 0:
                     raise
@@ -506,7 +506,7 @@ class WKSTTests(unittest.TestCase):
         try:
             resp2 = wkst.hNetrSetPrimaryComputerName(dce,'FREEFLY\x00', NULL, NULL )
             resp2.dump()
-        except Exception, e:
+        except Exception as e:
             if str(e).find('ERROR_NOT_SUPPORTED') < 0:
                 if str(e).find('ERROR_INVALID_PARAMETER') < 0:
                     raise
@@ -521,7 +521,7 @@ class WKSTTests(unittest.TestCase):
         try:
             resp2 = dce.request(req)
             resp2.dump()
-        except Exception, e:
+        except Exception as e:
             if str(e).find('ERROR_NOT_SUPPORTED') < 0:
                 raise
 
@@ -531,7 +531,7 @@ class WKSTTests(unittest.TestCase):
         try:
             resp2 = wkst.hNetrEnumerateComputerNames(dce,wkst.NET_COMPUTER_NAME_TYPE.NetAllComputerNames)
             resp2.dump()
-        except Exception, e:
+        except Exception as e:
             if str(e).find('ERROR_NOT_SUPPORTED') < 0:
                 raise
 
@@ -539,7 +539,7 @@ class WKSTTests(unittest.TestCase):
 class SMBTransport(WKSTTests):
     def setUp(self):
         WKSTTests.setUp(self)
-        configFile = ConfigParser.ConfigParser()
+        configFile = ConfigParser()
         configFile.read('dcetests.cfg')
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')
@@ -553,7 +553,7 @@ class SMBTransport(WKSTTests):
 class SMBTransport64(WKSTTests):
     def setUp(self):
         WKSTTests.setUp(self)
-        configFile = ConfigParser.ConfigParser()
+        configFile = ConfigParser()
         configFile.read('dcetests.cfg')
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')

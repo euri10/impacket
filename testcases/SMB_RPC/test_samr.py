@@ -2832,7 +2832,7 @@ class SAMRTests(unittest.TestCase):
 class SMBTransport(SAMRTests):
     def setUp(self):
         SAMRTests.setUp(self)
-        configFile = ConfigParser.ConfigParser()
+        configFile = ConfigParser()
         configFile.read('dcetests.cfg')
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')
@@ -2846,7 +2846,7 @@ class SMBTransport(SAMRTests):
 class TCPTransport(SAMRTests):
     def setUp(self):
         SAMRTests.setUp(self)
-        configFile = ConfigParser.ConfigParser()
+        configFile = ConfigParser()
         configFile.read('dcetests.cfg')
         self.username = configFile.get('TCPTransport', 'username')
         self.domain   = configFile.get('TCPTransport', 'domain')
@@ -2861,7 +2861,7 @@ class TCPTransport(SAMRTests):
 class SMBTransport64(SAMRTests):
     def setUp(self):
         SAMRTests.setUp(self)
-        configFile = ConfigParser.ConfigParser()
+        configFile = ConfigParser()
         configFile.read('dcetests.cfg')
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')
@@ -2875,7 +2875,7 @@ class SMBTransport64(SAMRTests):
 class TCPTransport64(SAMRTests):
     def setUp(self):
         SAMRTests.setUp(self)
-        configFile = ConfigParser.ConfigParser()
+        configFile = ConfigParser()
         configFile.read('dcetests.cfg')
         self.username = configFile.get('TCPTransport', 'username')
         self.domain   = configFile.get('TCPTransport', 'domain')
