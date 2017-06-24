@@ -25,6 +25,9 @@ from impacket.dcerpc.v5 import transport
 from impacket.dcerpc.v5 import lsat
 from impacket.dcerpc.v5.dtypes import NULL, MAXIMUM_ALLOWED, RPC_UNICODE_STRING
 
+import os
+current_dir = os.path.dirname(os.path.realpath(__file__))
+
 
 class LSATTests(unittest.TestCase):
     def connect(self):
@@ -327,7 +330,7 @@ class SMBTransport(LSATTests):
     def setUp(self):
         LSATTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')
         self.serverName = configFile.get('SMBTransport', 'servername')
@@ -341,7 +344,7 @@ class SMBTransport64(LSATTests):
     def setUp(self):
         LSATTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')
         self.serverName = configFile.get('SMBTransport', 'servername')

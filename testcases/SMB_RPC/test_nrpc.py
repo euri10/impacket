@@ -61,7 +61,8 @@ from impacket.dcerpc.v5 import transport
 from impacket.dcerpc.v5 import epm, nrpc
 from impacket.dcerpc.v5.dtypes import NULL
 from impacket import ntlm
-
+import os
+current_dir = os.path.dirname(os.path.realpath(__file__))
 
 class NRPCTests(unittest.TestCase):
     def connect(self):
@@ -978,7 +979,7 @@ class TCPTransport(NRPCTests):
     def setUp(self):
         NRPCTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('TCPTransport', 'username')
         self.domain   = configFile.get('TCPTransport', 'domain')
         self.serverName = configFile.get('TCPTransport', 'servername')
@@ -992,7 +993,7 @@ class SMBTransport(NRPCTests):
     def setUp(self):
         NRPCTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')
         self.serverName = configFile.get('SMBTransport', 'servername')

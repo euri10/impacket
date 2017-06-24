@@ -1,4 +1,6 @@
 nose
-pycrypto
+git+https://github.com/dlitz/pycrypto.git
 configparser
 pyasn1
+pyopenssl
+discover

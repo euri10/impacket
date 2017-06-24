@@ -16,7 +16,8 @@ from impacket.dcerpc.v5 import mimilib, epm
 from impacket.dcerpc.v5.dtypes import NULL, MAXIMUM_ALLOWED, OWNER_SECURITY_INFORMATION
 from impacket.winregistry import hexdump
 from impacket.dcerpc.v5.rpcrt import RPC_C_AUTHN_LEVEL_PKT_INTEGRITY, RPC_C_AUTHN_LEVEL_PKT_PRIVACY
-
+import os
+current_dir = os.path.dirname(os.path.realpath(__file__))
 
 class RRPTests(unittest.TestCase):
     def connect(self):
@@ -104,7 +105,7 @@ class TCPTransport(RRPTests):
     def setUp(self):
         RRPTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('TCPTransport', 'username')
         self.domain   = configFile.get('TCPTransport', 'domain')
         self.serverName = configFile.get('TCPTransport', 'servername')

@@ -1,6 +1,8 @@
 import struct
 
 from impacket import ntlm
+import os
+current_dir = os.path.dirname(os.path.realpath(__file__))
 
 # Hexdump packets
 

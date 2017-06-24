@@ -19,6 +19,8 @@ from impacket import nt_errors
 # would do the trick.
 # ToDo:
 # [ ] Add the rest of SMBConnection public methods
+import os
+current_dir = os.path.dirname(os.path.realpath(__file__))
 
 class SMBTests(unittest.TestCase):
     def create_connection(self):
@@ -269,7 +271,7 @@ class SMB1Tests(SMBTests):
         SMBTests.setUp(self)
         # Put specific configuration for target machine with SMB1
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')
         self.serverName = configFile.get('SMBTransport', 'servername')
@@ -289,7 +291,7 @@ class SMB1TestsUnicode(SMBTests):
         SMBTests.setUp(self)
         # Put specific configuration for target machine with SMB1
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')
         self.serverName = configFile.get('SMBTransport', 'servername')
@@ -309,7 +311,7 @@ class SMB002Tests(SMBTests):
         # Put specific configuration for target machine with SMB_002
         SMBTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')
         self.serverName = configFile.get('SMBTransport', 'servername')
@@ -328,7 +330,7 @@ class SMB21Tests(SMBTests):
         # Put specific configuration for target machine with SMB 2.1
         SMBTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')
         self.serverName = configFile.get('SMBTransport', 'servername')
@@ -347,7 +349,7 @@ class SMB3Tests(SMBTests):
         # Put specific configuration for target machine with SMB3
         SMBTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')
         self.serverName = configFile.get('SMBTransport', 'servername')

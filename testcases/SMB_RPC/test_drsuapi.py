@@ -23,10 +23,12 @@ from impacket.dcerpc.v5 import drsuapi
 from impacket.dcerpc.v5.dtypes import NULL, LPWSTR
 from impacket.dcerpc.v5.rpcrt import RPC_C_AUTHN_LEVEL_PKT_INTEGRITY, RPC_C_AUTHN_LEVEL_PKT_PRIVACY
 
+import os
+current_dir = os.path.dirname(os.path.realpath(__file__))
 
 class DRSRTests(unittest.TestCase):
     def connect(self):
-        rpctransport = transport.DCERPCTransportFactory(self.stringBinding )
+        rpctransport = transport.DCERPCTransportFactory(self.stringBinding)
         if len(self.hashes) > 0:
             lmhash, nthash = self.hashes.split(':')
         else:
@@ -454,7 +456,7 @@ class SMBTransport(DRSRTests):
     def setUp(self):
         DRSRTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')
         self.serverName = configFile.get('SMBTransport', 'servername')
@@ -468,7 +470,7 @@ class SMBTransport64(DRSRTests):
     def setUp(self):
         DRSRTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')
         self.serverName = configFile.get('SMBTransport', 'servername')
@@ -483,7 +485,7 @@ class TCPTransport(DRSRTests):
     def setUp(self):
         DRSRTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('TCPTransport', 'username')
         self.domain   = configFile.get('TCPTransport', 'domain')
         self.serverName = configFile.get('TCPTransport', 'servername')
@@ -497,7 +499,7 @@ class TCPTransport64(DRSRTests):
     def setUp(self):
         DRSRTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('TCPTransport', 'username')
         self.domain   = configFile.get('TCPTransport', 'domain')
         self.serverName = configFile.get('TCPTransport', 'servername')

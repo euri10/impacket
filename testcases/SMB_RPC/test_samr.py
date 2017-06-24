@@ -123,7 +123,6 @@
 # Shouldn't dump errors against a win7
 ################################################################################
 
-from builtins import range
 
 import unittest
 from configparser import ConfigParser
@@ -135,7 +134,8 @@ from impacket.dcerpc.v5 import samr, epm
 from impacket.dcerpc.v5 import dtypes
 from impacket import nt_errors, ntlm
 from impacket.dcerpc.v5.ndr import NULL
-
+import os
+current_dir = os.path.dirname(os.path.realpath(__file__))
 
 class SAMRTests(unittest.TestCase):
     def connect(self):
@@ -2833,7 +2833,7 @@ class SMBTransport(SAMRTests):
     def setUp(self):
         SAMRTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')
         self.serverName = configFile.get('SMBTransport', 'servername')
@@ -2847,7 +2847,7 @@ class TCPTransport(SAMRTests):
     def setUp(self):
         SAMRTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('TCPTransport', 'username')
         self.domain   = configFile.get('TCPTransport', 'domain')
         self.serverName = configFile.get('TCPTransport', 'servername')
@@ -2862,7 +2862,7 @@ class SMBTransport64(SAMRTests):
     def setUp(self):
         SAMRTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')
         self.serverName = configFile.get('SMBTransport', 'servername')
@@ -2876,7 +2876,7 @@ class TCPTransport64(SAMRTests):
     def setUp(self):
         SAMRTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('TCPTransport', 'username')
         self.domain   = configFile.get('TCPTransport', 'domain')
         self.serverName = configFile.get('TCPTransport', 'servername')

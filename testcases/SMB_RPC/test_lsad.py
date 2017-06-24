@@ -49,6 +49,8 @@ from configparser import ConfigParser
 from impacket.dcerpc.v5 import transport, epm, lsad
 from impacket.dcerpc.v5.ndr import NULL
 from impacket.dcerpc.v5.dtypes import MAXIMUM_ALLOWED, RPC_UNICODE_STRING, DELETE
+import os
+current_dir = os.path.dirname(os.path.realpath(__file__))
 
 class LSADTests(unittest.TestCase):
     def connect(self):
@@ -1022,7 +1024,7 @@ class SMBTransport(LSADTests):
     def setUp(self):
         LSADTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')
         self.serverName = configFile.get('SMBTransport', 'servername')
@@ -1036,7 +1038,7 @@ class SMBTransport64(LSADTests):
     def setUp(self):
         LSADTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')
         self.serverName = configFile.get('SMBTransport', 'servername')

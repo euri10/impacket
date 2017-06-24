@@ -7,7 +7,8 @@ from impacket.dcerpc.v5.dtypes import NULL
 from impacket.dcerpc.v5.rpcrt import RPC_C_AUTHN_LEVEL_PKT_INTEGRITY, RPC_C_AUTHN_LEVEL_PKT_PRIVACY, \
     RPC_C_AUTHN_LEVEL_NONE, RPC_C_AUTHN_GSS_NEGOTIATE, RPC_C_AUTHN_WINNT
 from impacket.dcerpc.v5.dtypes import RPC_UNICODE_STRING
-
+import os
+current_dir = os.path.dirname(os.path.realpath(__file__))
 
 # aimed at testing just the DCERPC engine, not the particular
 # endpoints (we should do specific tests for endpoints)
@@ -398,7 +399,7 @@ class TCPTransport(DCERPCTests):
         DCERPCTests.setUp(self)
         # Put specific configuration for target machine with SMB1
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('TCPTransport', 'username')
         self.domain   = configFile.get('TCPTransport', 'domain')
         self.serverName = configFile.get('TCPTransport', 'servername')
@@ -414,7 +415,7 @@ class SMBTransport(DCERPCTests):
         # Put specific configuration for target machine with SMB_002
         DCERPCTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('SMBTransport', 'username')
         self.domain = configFile.get('SMBTransport', 'domain')
         self.serverName = configFile.get('SMBTransport', 'servername')

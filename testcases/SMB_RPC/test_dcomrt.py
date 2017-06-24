@@ -28,9 +28,20 @@ from impacket.dcerpc.v5 import dcomrt
 from impacket.dcerpc.v5.dcom import scmp, vds, oaut, comev
 from impacket.uuid import string_to_bin, uuidtup_to_bin
 from impacket import ntlm
-
+import os
+current_dir = os.path.dirname(os.path.realpath(__file__))
 
 class DCOMTests(unittest.TestCase):
+    def setUp(self):
+        configFile = ConfigParser()
+        configFile.read(os.path.join(current_dir,'dcetests.cfg'))
+        self.username = configFile.get('TCPTransport', 'username')
+        self.domain = configFile.get('TCPTransport', 'domain')
+        self.serverName = configFile.get('TCPTransport', 'servername')
+        self.password = configFile.get('TCPTransport', 'password')
+        self.machine = configFile.get('TCPTransport', 'machine')
+        self.hashes = configFile.get('TCPTransport', 'hashes')
+
     def connect(self):
         rpctransport = transport.DCERPCTransportFactory(self.stringBinding)
         if len(self.hashes) > 0:
@@ -313,7 +324,7 @@ class TCPTransport(DCOMTests):
     def setUp(self):
         DCOMTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('TCPTransport', 'username')
         self.domain   = configFile.get('TCPTransport', 'domain')
         self.serverName = configFile.get('TCPTransport', 'servername')
@@ -327,7 +338,7 @@ class TCPTransport64(DCOMTests):
     def setUp(self):
         DCOMTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('TCPTransport', 'username')
         self.domain   = configFile.get('TCPTransport', 'domain')
         self.serverName = configFile.get('TCPTransport', 'servername')

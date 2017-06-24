@@ -2,7 +2,8 @@ from configparser import ConfigParser
 import unittest
 
 from impacket import nmb
-
+import os
+current_dir = os.path.dirname(os.path.realpath(__file__))
 
 class NMBTests(unittest.TestCase):
     def create_connection(self):
@@ -29,7 +30,7 @@ class NMBTests(unittest.TestCase):
         n = nmb.NetBIOS()
         # ToDo: Look at this
         #resp = n.name_registration_request('*SMBSERVER', self.serverName, nmb.TYPE_WORKSTATION, None,nmb.NB_FLAGS_G, '1.1.1.1')
-        resp = n.name_registration_request('*JSMBSERVER', self.serverName, nmb.TYPE_WORKSTATION, None,nmb.NB_FLAGS_ONT_P, '1.1.1.2')
+        resp = n.name_registration_request('*JSMBSERVER', self.serverName, nmb.TYPE_WORKSTATION, None, nmb.NB_FLAGS_ONT_P, '1.1.1.2')
         resp.dump()
 
     def test_name_query_request(self):
@@ -44,7 +45,7 @@ class NetBIOSTests(NMBTests):
         NMBTests.setUp(self)
         # Put specific configuration for target machine with SMB1
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.serverName = configFile.get('SMBTransport', 'servername')
         self.machine  = configFile.get('SMBTransport', 'machine')
 

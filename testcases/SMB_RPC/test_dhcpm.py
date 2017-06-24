@@ -17,7 +17,8 @@ from impacket.dcerpc.v5 import transport
 from impacket.dcerpc.v5 import epm, dhcpm, samr
 from impacket.dcerpc.v5.dtypes import NULL
 from impacket.dcerpc.v5.rpcrt import RPC_C_AUTHN_LEVEL_PKT_PRIVACY, RPC_C_AUTHN_WINNT
-
+import os
+current_dir = os.path.dirname(os.path.realpath(__file__))
 class DHCPMTests(unittest.TestCase):
     def connect(self, version):
         rpctransport = transport.DCERPCTransportFactory(self.stringBinding)
@@ -95,7 +96,7 @@ class SMBTransport(DHCPMTests):
     def setUp(self):
         DHCPMTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')
         self.serverName = configFile.get('SMBTransport', 'servername')
@@ -109,7 +110,7 @@ class SMBTransport64(DHCPMTests):
     def setUp(self):
         DHCPMTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')
         self.serverName = configFile.get('SMBTransport', 'servername')
@@ -123,7 +124,7 @@ class TCPTransport(DHCPMTests):
     def setUp(self):
         DHCPMTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('TCPTransport', 'username')
         self.domain   = configFile.get('TCPTransport', 'domain')
         self.serverName = configFile.get('TCPTransport', 'servername')
@@ -138,7 +139,7 @@ class TCPTransport64(DHCPMTests):
     def setUp(self):
         DHCPMTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('TCPTransport', 'username')
         self.domain = configFile.get('TCPTransport', 'domain')
         self.serverName = configFile.get('TCPTransport', 'servername')

@@ -14,9 +14,11 @@ from impacket.dcerpc.v5 import transport
 from impacket.dcerpc.v5 import epm
 from impacket.dcerpc.v5.ndr import NULL
 from impacket.uuid import string_to_bin, uuidtup_to_bin
-
+import os
+current_dir = os.path.dirname(os.path.realpath(__file__))
 
 class EPMTests(unittest.TestCase):
+
     def connect(self):
         rpctransport = transport.DCERPCTransportFactory(self.stringBinding)
         if len(self.hashes) > 0:
@@ -114,7 +116,7 @@ class SMBTransport(EPMTests):
     def setUp(self):
         EPMTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')
         self.serverName = configFile.get('SMBTransport', 'servername')
@@ -128,7 +130,7 @@ class TCPTransport(EPMTests):
     def setUp(self):
         EPMTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('TCPTransport', 'username')
         self.domain   = configFile.get('TCPTransport', 'domain')
         self.serverName = configFile.get('TCPTransport', 'servername')
@@ -142,7 +144,7 @@ class SMBTransport64(EPMTests):
     def setUp(self):
         EPMTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')
         self.serverName = configFile.get('SMBTransport', 'servername')
@@ -156,7 +158,7 @@ class TCPTransport64(EPMTests):
     def setUp(self):
         EPMTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('TCPTransport', 'username')
         self.domain   = configFile.get('TCPTransport', 'domain')
         self.serverName = configFile.get('TCPTransport', 'servername')

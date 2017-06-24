@@ -13,6 +13,8 @@ from impacket.dcerpc.v5.epm import ept_lookupResponse
 from impacket.uuid import string_to_bin, uuidtup_to_bin
 
 import unittest
+import os
+current_dir = os.path.dirname(os.path.realpath(__file__))
 
 class NDRTests(unittest.TestCase):
     NDR64Syntax = uuidtup_to_bin(('71710533-BEBA-4937-8319-B5DBEF9CCC36', '1.0'))

@@ -13,6 +13,9 @@ from configparser import ConfigParser
 from impacket.dcerpc.v5 import transport
 from impacket.dcerpc.v5 import mgmt
 
+import os
+current_dir = os.path.dirname(os.path.realpath(__file__))
+
 
 class MGMTTests(unittest.TestCase):
     def connect(self):
@@ -115,7 +118,7 @@ class SMBTransport(MGMTTests):
     def setUp(self):
         MGMTTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')
         self.serverName = configFile.get('SMBTransport', 'servername')
@@ -129,7 +132,7 @@ class TCPTransport(MGMTTests):
     def setUp(self):
         MGMTTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('TCPTransport', 'username')
         self.domain   = configFile.get('TCPTransport', 'domain')
         self.serverName = configFile.get('TCPTransport', 'servername')
@@ -143,7 +146,7 @@ class SMBTransport64(MGMTTests):
     def setUp(self):
         MGMTTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')
         self.serverName = configFile.get('SMBTransport', 'servername')
@@ -157,7 +160,7 @@ class TCPTransport64(MGMTTests):
     def setUp(self):
         MGMTTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('TCPTransport', 'username')
         self.domain   = configFile.get('TCPTransport', 'domain')
         self.serverName = configFile.get('TCPTransport', 'servername')

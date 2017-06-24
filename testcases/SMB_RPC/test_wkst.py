@@ -34,6 +34,8 @@ from impacket.dcerpc.v5 import transport
 from impacket.dcerpc.v5 import wkst
 from impacket.dcerpc.v5.ndr import NULL
 
+import os
+current_dir = os.path.dirname(os.path.realpath(__file__))
 
 class WKSTTests(unittest.TestCase):
     def connect(self):
@@ -540,7 +542,7 @@ class SMBTransport(WKSTTests):
     def setUp(self):
         WKSTTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')
         self.serverName = configFile.get('SMBTransport', 'servername')
@@ -554,7 +556,7 @@ class SMBTransport64(WKSTTests):
     def setUp(self):
         WKSTTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')
         self.serverName = configFile.get('SMBTransport', 'servername')

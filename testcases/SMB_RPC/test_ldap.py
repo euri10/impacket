@@ -13,6 +13,9 @@ import unittest
 from configparser import ConfigParser
 
 from impacket.ldap import ldap, ldapasn1
+import os
+current_dir = os.path.dirname(os.path.realpath(__file__))
+
 
 class LDAPTests(unittest.TestCase):
     def dummySearch(self, ldapConnection):
@@ -84,7 +87,7 @@ class TCPTransport(LDAPTests):
     def setUp(self):
         LDAPTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('TCPTransport', 'username')
         self.domain   = configFile.get('TCPTransport', 'domain')
         self.serverName = configFile.get('TCPTransport', 'servername')
@@ -99,7 +102,7 @@ class TCPTransportSSL(LDAPTests):
     def setUp(self):
         LDAPTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('TCPTransport', 'username')
         self.domain = configFile.get('TCPTransport', 'domain')
         self.serverName = configFile.get('TCPTransport', 'servername')

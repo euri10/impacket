@@ -61,7 +61,8 @@ from configparser import ConfigParser
 from impacket.dcerpc.v5 import transport
 from impacket.dcerpc.v5 import srvs
 from impacket.dcerpc.v5.dtypes import NULL, OWNER_SECURITY_INFORMATION
-
+import os
+current_dir = os.path.dirname(os.path.realpath(__file__))
 
 class SRVSTests(unittest.TestCase):
     def connect(self):
@@ -1140,7 +1141,7 @@ class SMBTransport(SRVSTests):
     def setUp(self):
         SRVSTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')
         self.serverName = configFile.get('SMBTransport', 'servername')
@@ -1154,7 +1155,7 @@ class SMBTransport64(SRVSTests):
     def setUp(self):
         SRVSTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')
         self.serverName = configFile.get('SMBTransport', 'servername')

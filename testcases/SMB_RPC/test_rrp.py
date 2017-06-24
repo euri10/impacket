@@ -47,7 +47,8 @@ from configparser import ConfigParser
 from impacket.dcerpc.v5 import transport
 from impacket.dcerpc.v5 import epm, rrp
 from impacket.dcerpc.v5.dtypes import NULL, MAXIMUM_ALLOWED, OWNER_SECURITY_INFORMATION
-
+import os
+current_dir = os.path.dirname(os.path.realpath(__file__))
 
 class RRPTests(unittest.TestCase):
     def connect(self):
@@ -688,7 +689,7 @@ class SMBTransport(RRPTests):
     def setUp(self):
         RRPTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')
         self.serverName = configFile.get('SMBTransport', 'servername')
@@ -702,7 +703,7 @@ class SMBTransport64(RRPTests):
     def setUp(self):
         RRPTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')
         self.serverName = configFile.get('SMBTransport', 'servername')
@@ -716,7 +717,7 @@ class TCPTransport(RRPTests):
     def setUp(self):
         RRPTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('TCPTransport', 'username')
         self.domain   = configFile.get('TCPTransport', 'domain')
         self.serverName = configFile.get('TCPTransport', 'servername')

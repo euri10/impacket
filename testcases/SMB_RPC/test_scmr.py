@@ -50,7 +50,8 @@ from impacket.dcerpc.v5.ndr import NULL
 from impacket.crypto import encryptSecret
 from impacket.uuid import string_to_bin
 from impacket import ntlm
-
+import os
+current_dir = os.path.dirname(os.path.realpath(__file__))
 
 class SCMRTests(unittest.TestCase):
     def changeServiceAndQuery(self, dce, cbBufSize, hService, dwServiceType, dwStartType, dwErrorControl, lpBinaryPathName, lpLoadOrderGroup, lpdwTagId, lpDependencies, dwDependSize, lpServiceStartName, lpPassword, dwPwSize, lpDisplayName):
@@ -658,7 +659,7 @@ class SMBTransport(SCMRTests):
     def setUp(self):
         SCMRTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')
         self.serverName = configFile.get('SMBTransport', 'servername')
@@ -671,7 +672,7 @@ class TCPTransport(SCMRTests):
     def setUp(self):
         SCMRTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('TCPTransport', 'username')
         self.domain   = configFile.get('TCPTransport', 'domain')
         self.serverName = configFile.get('TCPTransport', 'servername')

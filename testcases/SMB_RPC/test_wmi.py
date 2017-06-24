@@ -51,6 +51,9 @@ from impacket.dcerpc.v5.dcomrt import DCOMConnection
 from impacket.winregistry import hexdump
 from impacket.uuid import string_to_bin, uuidtup_to_bin, generate
 from impacket import system_errors, ntlm
+import os
+current_dir = os.path.dirname(os.path.realpath(__file__))
+
 
 class WMITests(unittest.TestCase):
     def tes_activation(self):
@@ -197,7 +200,7 @@ class TCPTransport(WMITests):
     def setUp(self):
         WMITests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('TCPTransport', 'username')
         self.domain   = configFile.get('TCPTransport', 'domain')
         self.serverName = configFile.get('TCPTransport', 'servername')
@@ -216,7 +219,7 @@ class TCPTransport64(WMITests):
     def setUp(self):
         WMITests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('TCPTransport', 'username')
         self.domain   = configFile.get('TCPTransport', 'domain')
         self.serverName = configFile.get('TCPTransport', 'servername')

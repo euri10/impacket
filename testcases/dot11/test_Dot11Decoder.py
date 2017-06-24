@@ -2,12 +2,10 @@
 
 # sorry, this is very ugly, but I'm in python 2.5
 import sys
-sys.path.insert(0,"../..")
 
-from impacket import ImpactDecoder
-from impacket import Dot11Decoder
-from impacket import Dot11Types
-from binascii import hexlify
+from impacket.ImpactDecoder import Dot11Decoder
+
+
 import unittest
 
 class TestDot11Decoder(unittest.TestCase):
@@ -26,15 +24,15 @@ class TestDot11Decoder(unittest.TestCase):
         
     def test_01_Dot11Decoder(self):
         'Test Dot11 decoder'
-        self.assertEqual(str(self.in0.__class__), "dot11.Dot11")
+        self.assertEqual(str(self.in0.__class__), "impacket.dot11.Dot11")
         
     def test_02_Dot11DataFrameDecoder(self):
         'Test Dot11DataFrame decoder'
-        self.assertEqual(str(self.in1.__class__), "dot11.Dot11DataFrame")
+        self.assertEqual(str(self.in1.__class__), "impacket.dot11.Dot11DataFrame")
     
     def test_03_Dot11WEP(self):
         'Test Dot11WEP decoder'
-        self.assertEqual(str(self.in2.__class__), "dot11.Dot11WEP")
+        self.assertEqual(str(self.in2.__class__), "impacket.dot11.Dot11WEP")
 
     def test_04_Dot11WEPData(self):
         'Test Dot11WEPData decoder'

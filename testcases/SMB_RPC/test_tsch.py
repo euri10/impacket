@@ -67,7 +67,8 @@ from impacket.dcerpc.v5 import tsch, atsvc, sasec
 from impacket.dcerpc.v5.atsvc import AT_INFO
 from impacket.dcerpc.v5.dtypes import NULL, LPWSTR
 from impacket.dcerpc.v5.rpcrt import RPC_C_AUTHN_LEVEL_PKT_INTEGRITY, RPC_C_AUTHN_LEVEL_PKT_PRIVACY
-
+import os
+current_dir = os.path.dirname(os.path.realpath(__file__))
 
 class TSCHTests(unittest.TestCase):
     def connect(self, stringBinding, bindUUID):
@@ -903,7 +904,7 @@ class SMBTransport(TSCHTests):
     def setUp(self):
         TSCHTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')
         self.serverName = configFile.get('SMBTransport', 'servername')
@@ -918,7 +919,7 @@ class SMBTransport64(TSCHTests):
     def setUp(self):
         TSCHTests.setUp(self)
         configFile = ConfigParser()
-        configFile.read('dcetests.cfg')
+        configFile.read(os.path.join(current_dir, 'dcetests.cfg'))
         self.username = configFile.get('SMBTransport', 'username')
         self.domain   = configFile.get('SMBTransport', 'domain')
         self.serverName = configFile.get('SMBTransport', 'servername')

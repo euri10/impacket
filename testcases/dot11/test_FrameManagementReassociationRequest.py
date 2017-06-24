@@ -16,10 +16,10 @@ class TestDot11ManagementReassociationRequestFrames(unittest.TestCase):
         self.radiotap_decoder = RadioTapDecoder()
         radiotap=self.radiotap_decoder.decode(self.rawframe)
 
-        self.assertEqual(str(radiotap.__class__), "dot11.RadioTap")
+        self.assertEqual(str(radiotap.__class__), "impacket.dot11.RadioTap")
 
         self.dot11=radiotap.child()
-        self.assertEqual(str(self.dot11.__class__), "dot11.Dot11")
+        self.assertEqual(str(self.dot11.__class__), "impacket.dot11.Dot11")
 
         type = self.dot11.get_type()
         self.assertEqual(type,Dot11Types.DOT11_TYPE_MANAGEMENT)
@@ -31,10 +31,10 @@ class TestDot11ManagementReassociationRequestFrames(unittest.TestCase):
         self.assertEqual(typesubtype,Dot11Types.DOT11_TYPE_MANAGEMENT_SUBTYPE_REASSOCIATION_REQUEST)
         
         self.management_base=self.dot11.child()
-        self.assertEqual(str(self.management_base.__class__), "dot11.Dot11ManagementFrame")
+        self.assertEqual(str(self.management_base.__class__), "impacket.dot11.Dot11ManagementFrame")
         
         self.management_reassociation_request=self.management_base.child()
-        self.assertEqual(str(self.management_reassociation_request.__class__), "dot11.Dot11ManagementReassociationRequest")
+        self.assertEqual(str(self.management_reassociation_request.__class__), "impacket.dot11.Dot11ManagementReassociationRequest")
             
         
     def test_01(self):

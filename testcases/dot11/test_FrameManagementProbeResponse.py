@@ -15,10 +15,10 @@ class TestDot11ManagementProbeResponseFrames(unittest.TestCase):
         self.radiotap_decoder = RadioTapDecoder()
         radiotap=self.radiotap_decoder.decode(self.rawProbeResponseframe)
 
-        self.assertEqual(str(radiotap.__class__), "dot11.RadioTap")
+        self.assertEqual(str(radiotap.__class__), "impacket.dot11.RadioTap")
 
         self.dot11=radiotap.child()
-        self.assertEqual(str(self.dot11.__class__), "dot11.Dot11")   
+        self.assertEqual(str(self.dot11.__class__), "impacket.dot11.Dot11")
 
         type = self.dot11.get_type()
         self.assertEqual(type,Dot11Types.DOT11_TYPE_MANAGEMENT)
@@ -30,10 +30,10 @@ class TestDot11ManagementProbeResponseFrames(unittest.TestCase):
         self.assertEqual(typesubtype,Dot11Types.DOT11_TYPE_MANAGEMENT_SUBTYPE_PROBE_RESPONSE)
         
         self.management_base=self.dot11.child()
-        self.assertEqual(str(self.management_base.__class__), "dot11.Dot11ManagementFrame")   
+        self.assertEqual(str(self.management_base.__class__), "impacket.dot11.Dot11ManagementFrame")
         
         self.management_probe_response=self.management_base.child()
-        self.assertEqual(str(self.management_probe_response.__class__), "dot11.Dot11ManagementProbeResponse")   
+        self.assertEqual(str(self.management_probe_response.__class__), "impacket.dot11.Dot11ManagementProbeResponse")
             
         
     def test_01(self):
