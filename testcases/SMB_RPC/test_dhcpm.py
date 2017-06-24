@@ -19,6 +19,7 @@ from impacket.dcerpc.v5.dtypes import NULL
 from impacket.dcerpc.v5.rpcrt import RPC_C_AUTHN_LEVEL_PKT_PRIVACY, RPC_C_AUTHN_WINNT
 import os
 current_dir = os.path.dirname(os.path.realpath(__file__))
+
 class DHCPMTests(unittest.TestCase):
     def connect(self, version):
         rpctransport = transport.DCERPCTransportFactory(self.stringBinding)

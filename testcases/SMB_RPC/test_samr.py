@@ -149,6 +149,7 @@ class SAMRTests(unittest.TestCase):
         if hasattr(rpctransport, 'set_credentials'):
             # This method exists only for selected protocol sequences.
             rpctransport.set_credentials(self.username,self.password, self.domain, lmhash, nthash)
+        rpctransport.set_connect_timeout(5)
         dce = rpctransport.get_dce_rpc()
         dce.connect()
         #dce.set_auth_level(ntlm.NTLM_AUTH_PKT_PRIVACY)
